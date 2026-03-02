@@ -138,6 +138,5 @@ jobs:
         if: always()
         uses: peaceiris/actions-gh-pages@v4.0.0
         with:
-          name: test-report
           github_token: ${{ secrets.GITHUB_TOKEN}}
-          publish_dir: reports
+          publish_dir: public
