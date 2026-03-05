@@ -88,6 +88,7 @@ tasks.register('runApiTest', JavaExec) {
     // Run all features in the resources/api_features folder
     args = [
             '--plugin', 'pretty',
+            '--plugin', 'summary',
             '--plugin', 'html:build/reports/cucumber/api_test_report.html', // cucumber report
             '--plugin', 'json:build/reports/cucumber/api_test_report.json', // cucumber report
             '--plugin', 'io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm', // build/allure-results->build/reports/
@@ -117,6 +118,7 @@ tasks.register("runWebTest", JavaExec) {
     // Run all features in the resources/web_features folder
     args = [
             '--plugin', 'pretty',
+            '--plugin', 'summary',
             '--plugin', 'html:build/reports/cucumber/webUi_test_report.html', // cucumber report
             '--plugin', 'json:build/reports/cucumber/webUi_test_report.json', // cucumber report
             '--plugin', 'io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm', // build/allure-results->build/reports/

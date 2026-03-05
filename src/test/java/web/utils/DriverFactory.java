@@ -15,18 +15,18 @@ public class DriverFactory {
         // Set implicit wait from config
         int implicitWait = Integer.parseInt(ConfigReader.getProperty("implicitWait"));
         if (browser.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().clearDriverCache().setup();
+            WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--headless=new");
             options.addArguments("--no-sandbox");
             options.addArguments("--disable-dev-shm-usage");
             options.addArguments("--window-size=1920,1080");
+            options.addArguments("--remote-allow-origins=*"); // WebHooks driver handling for CI stability
             driver = new ChromeDriver(options);
         } else {
             throw new RuntimeException("Browser not supported: " + browser);
         }
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
-        driver.manage().window().maximize();
     }
 
     public static WebDriver getDriver() {
@@ -38,7 +38,11 @@ public class DriverFactory {
 
     public static void quitDriver() {
         if (driver != null) {
-            driver.quit();
+            try {
+                driver.quit();
+            } catch (Exception e) {
+                System.out.println("Driver already closed.");
+            }
             driver = null;
         }
     }

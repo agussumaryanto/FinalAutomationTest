@@ -11,29 +11,35 @@ import web.utils.DriverFactory;
 
 public class WebHooks {
 
-    private WebDriver driver;
-
     @Before
     public void beforeAllTests() {
         System.out.println("=== Starting WEB scenario ===");
         // Initialize driver
         DriverFactory.initDriver();
-        driver = DriverFactory.getDriver();
+        WebDriver driver = DriverFactory.getDriver();
         // Open base URL
         driver.get(ConfigReader.getProperty("baseUrl"));
     }
 
     @After
     public void afterAllTests(Scenario scenario) {
+        WebDriver driver = DriverFactory.getDriver();
         // Take screenshot if scenario fails
-        if (scenario.isFailed()) {
-            final byte[] screenshot = ((TakesScreenshot) driver)
-                    .getScreenshotAs(OutputType.BYTES);
-            scenario.attach(
-                    screenshot,"image/png", scenario.getName()
-            );
+        try {
+            if (scenario.isFailed() && driver != null) {
+                final byte[] screenshot =
+                        ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+                scenario.attach(screenshot, "image/png", scenario.getName());
+            }
+        } catch (Exception e) {
+            System.out.println("Screenshot failed: " + e.getMessage());
         }
-        DriverFactory.quitDriver();
+        // Quit driver
+        try {
+            DriverFactory.quitDriver();
+        } catch (Exception e) {
+            System.out.println("Driver already closed.");
+        }
         System.out.println("=== Ending WEB scenario ===");
     }
 }
