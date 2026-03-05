@@ -12,10 +12,15 @@ permissions:
 
 jobs:
   # =========================================
-  # API AUTOMATION
+  # API & WEB AUTOMATION
   # =========================================
-  dummyapiio-api-test:
+  api-web-test:
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        test-type: [api, web]
 
     steps:
       # download repository
@@ -39,74 +44,30 @@ jobs:
 
       # Execute the Gradle command for running tests
       - name: Run API Test
-        run: ./gradlew runApiTest
+        if: matrix.test-type == 'api'
+        run: ./gradlew clean runApiTest --info --stacktrace
+
+      - name: Run Web Test
+        if: matrix.test-type == 'web'
+        run: ./gradlew clean runWebTest --info --stacktrace
 
       - name: Generate Allure Report
         if: always()
         run: ./gradlew allureReport
 
-      # Archive API Test Result
-      - name: Upload API Cucumber Report
+      # Archive API & Web Test Result
+      - name: Upload Cucumber Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: api-cucumber
+          name: cucumber-${{ matrix.test-type }}
           path: build/reports/cucumber
 
-      - name: Upload API Allure Report
+      - name: Upload Allure Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: api-allure
-          path: build/reports/allure-report
-
-  # =========================================
-  # WEB UI AUTOMATION
-  # =========================================
-  demoblaze-web-ui-test:
-    runs-on: ubuntu-latest
-
-    steps:
-      # download repository
-      - uses: actions/checkout@v4
-
-      # setup java
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          cache: gradle     # Cache gradle for speed
-
-      # install browser
-      - name: Setup Chrome
-        uses: browser-actions/setup-chrome@v2.1.0
-
-      # setup gradlew
-      - name: Setup gradlew
-        run: chmod +x gradlew
-
-      # Execute the Gradle command for running tests
-      - name: Run Web UI Test
-        run: ./gradlew clean runWebTest
-
-      - name: Generate Allure Report
-        if: always()
-        run: ./gradlew allureReport
-
-      # Archive Web UI Test Result
-      - name: Upload Web Cucumber Report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: web-cucumber
-          path: build/reports/cucumber
-
-      - name: Upload API Allure Report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: web-allure
+          name: allure-${{ matrix.test-type }}
           path: build/reports/allure-report
 
   # =========================================
@@ -114,48 +75,22 @@ jobs:
   # =========================================
   deploy-report:
     runs-on: ubuntu-latest
-    needs: [dummyapiio-api-test, demoblaze-web-ui-test]
+    needs: api-web-test
     if: always()
 
     steps:
-      - name: Download API Cucumber Report
+      - name: Download Artifacts
         uses: actions/download-artifact@v4
-        with:
-          name: api-cucumber
-          path: api-cucumber
 
-      - name: Download API Allure Report
-        uses: actions/download-artifact@v4
-        with:
-          name: api-allure
-          path: api-allure
-
-      - name: Download Web Cucumber Report
-        uses: actions/download-artifact@v4
-        with:
-          name: web-cucumber
-          path: web-cucumber
-
-      - name: Download Web Allure Report
-        uses: actions/download-artifact@v4
-        with:
-          name: web-allure
-          path: web-allure
-
-      # Final folder structure
+     # Folder structure
       - name: Prepare Folder Structure
-        run: |
-          mkdir -p public/api/cucumber
-          mkdir -p public/api/allure
-          mkdir -p public/web/cucumber
-          mkdir -p public/web/allure
+        run:
+          mkdir -p public/api
+          mkdir -p public/web
+          cp -r cucumber-api/* public/api/ || true
+          cp -r cucumber-web/* public/web/ || true
 
-          cp -r api-cucumber/* public/api/cucumber/ || true
-          cp -r api-allure/* public/api/allure/ || true
-          cp -r web-cucumber/* public/web/cucumber/ || true
-          cp -r web-allure/* public/web/allure/ || true
-
-      # Deploy to GitHub Pages
+     # Deploy to GitHub Pages
       - name: Deploy report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v4.0.0
