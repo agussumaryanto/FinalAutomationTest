@@ -86,3 +86,7 @@ FinalAutomationTest\build\reports\allure-report\ -> untuk allure report
 10. Menambahkan file .gitattributes (opsional) untuk menampilkan bahasa yang dipakai (pada repo github) serta menghilangkan warning dari hasil running nya
 
 11. Mempersiapkan GitHub Actions dengan membuat file FinalAutomationTest.yml pada direktori .github/workflows untuk otomatisasi pengujian kode alur kerja langsung dari repositori 
+
+12. Pengujian dijalankan di GitHub Actions menggunakan Chrome tanpa antarmuka grafis (headless Chrome).
+
+13. Semua laporan dihasilkan dari artefak pipeline CI.
