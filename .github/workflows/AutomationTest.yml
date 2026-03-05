@@ -50,14 +50,14 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: dummy_api api-cucumber
-          path: reports/cucumber-results
+          name: api-cucumber
+          path: build/reports/cucumber
 
       - name: Upload API Allure Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: dummy_api api-allure
+          name: api-allure
           path: build/reports/allure-report
 
   # =========================================
@@ -99,14 +99,14 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: demoblaze web-cucumber
-          path: reports/cucumber-results
+          name: web-cucumber
+          path: build/reports/cucumber
 
       - name: Upload API Allure Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: demoblaze web-allure
+          name: web-allure
           path: build/reports/allure-report
 
   # =========================================
@@ -118,7 +118,29 @@ jobs:
     if: always()
 
     steps:
-      - uses: actions/download-artifact@v4
+      - name: Download API Cucumber Report
+        uses: actions/download-artifact@v4
+        with:
+          name: api-cucumber
+          path: api-cucumber
+
+      - name: Download API Allure Report
+        uses: actions/download-artifact@v4
+        with:
+          name: api-allure
+          path: api-allure
+
+      - name: Download Web Cucumber Report
+        uses: actions/download-artifact@v4
+        with:
+          name: web-cucumber
+          path: web-cucumber
+
+      - name: Download Web Allure Report
+        uses: actions/download-artifact@v4
+        with:
+          name: web-allure
+          path: web-allure
 
       # Final folder structure
       - name: Prepare Folder Structure
