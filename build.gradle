@@ -92,7 +92,7 @@ tasks.register('runApiTest', JavaExec) {
             '--plugin', 'json:build/reports/cucumber/api_test_report.json', // cucumber report
             '--plugin', 'io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm', // build/allure-results->build/reports/
             '--glue', 'api.stepdefinitions',
-            'src/test/resources/features.api_features',
+            'src/test/resources/features/api_features',
             '--tags', tags
     ]
     standardOutput = System.out
@@ -122,7 +122,7 @@ tasks.register("runWebTest", JavaExec) {
             '--plugin', 'io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm', // build/allure-results->build/reports/
             '--glue', 'web.stepdefinitions',
             '--glue', 'web.hooks',
-            'src/test/resources/features.web_features',
+            'src/test/resources/features/web_features',
             '--tags', tags
     ]
     standardOutput = System.out
