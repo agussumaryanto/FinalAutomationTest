@@ -12,7 +12,7 @@ permissions:
 
 env:
   JAVA_VERSION: 21
-  REPORT_DIR: public
+  REPORT_DIR: FinalAutomationTest/reports # folder report in repo
 
 jobs:
   # =========================================
@@ -37,7 +37,7 @@ jobs:
         with:
           java-version: ${{env.JAVA_VERSION}}
           distribution: 'temurin'
-          cache: gradle     # Cache gradle for speed
+          cache: gradle   # Cache gradle for speed
 
       # install browser
       - name: Setup Chrome
@@ -102,9 +102,9 @@ jobs:
           cp -r artifacts/cucumber-api/* $REPORT_DIR/api/ || true
           cp -r artifacts/cucumber-web/* $REPORT_DIR/web/ || true
           
-          # copy allure report
-          cp -r artifacts/allure-api/* $REPORT_DIR/allure-api/ || true
-          cp -r artifacts/allure-web/* $REPORT_DIR/allure-web/ || true
+          # copy allure report including the allure-report folder contents 
+          cp -r artifacts/allure-api/allure-report/* $REPORT_DIR/allure-api/ || true
+          cp -r artifacts/allure-web/allure-report/* $REPORT_DIR/allure-web/ || true
 
      # Deploy to GitHub Pages
       - name: Deploy report to Github Pages
