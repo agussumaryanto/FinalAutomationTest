@@ -1,0 +1,49 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"  As a registered user
+  I want to log in
+  So that I can access my account","4032","Failed login - wrong password","","Mon Mar 09 08:49:53 UTC 2026","passed","Mon Mar 09 08:49:57 UTC 2026","","User Login","Failed login - wrong password",""
+"  As a visitor
+  I want to create an account
+  So that I can log in to the application","2076","Successful registration","","Mon Mar 09 08:51:32 UTC 2026","passed","Mon Mar 09 08:51:34 UTC 2026","","User Signup","Successful registration",""
+"  As a visitor
+  I want to create an account
+  So that I can log in to the application","1458","Failed registration - empty field","","Mon Mar 09 08:51:38 UTC 2026","passed","Mon Mar 09 08:51:40 UTC 2026","","User Signup","Failed registration - empty field",""
+"  As a visitor
+  I want to create an account
+  So that I can log in to the application","3988","Failed registration - duplicate username","","Mon Mar 09 08:51:34 UTC 2026","passed","Mon Mar 09 08:51:38 UTC 2026","","User Signup","Failed registration - duplicate username",""
+"  As a new user
+  I want to complete a full purchase journey
+  So that I can register, login, buy a product, and logout successfully","55435","User completes full purchase journey","","Mon Mar 09 08:48:52 UTC 2026","passed","Mon Mar 09 08:49:47 UTC 2026","","Complete Purchase Flow","User completes full purchase journey",""
+"  As a logged in user
+  I want to log out
+  So that my session ends securely","2234","Logout button not visible when user is not logged in","","Mon Mar 09 08:50:03 UTC 2026","passed","Mon Mar 09 08:50:05 UTC 2026","","User Logout","Logout button not visible when user is not logged in",""
+"  As a logged in user
+  I want to manage products
+  So that I can browse and shop items","18658","Remove product from cart","","Mon Mar 09 08:51:14 UTC 2026","passed","Mon Mar 09 08:51:32 UTC 2026","","Product Management","Remove product from cart",""
+"  As a logged in user
+  I want to complete checkout
+  So that I can purchase products","29119","Successful payment","","Mon Mar 09 08:50:05 UTC 2026","passed","Mon Mar 09 08:50:34 UTC 2026","","Checkout and Payment","Successful payment",""
+"  As a logged in user
+  I want to manage products
+  So that I can browse and shop items","2962","Add product to cart","","Mon Mar 09 08:51:08 UTC 2026","passed","Mon Mar 09 08:51:11 UTC 2026","","Product Management","Add product to cart",""
+"  As a logged in user
+  I want to log out
+  So that my session ends securely","2219","Successful logout","","Mon Mar 09 08:50:01 UTC 2026","passed","Mon Mar 09 08:50:03 UTC 2026","","User Logout","Successful logout",""
+"  As a logged in user
+  I want to manage products
+  So that I can browse and shop items","2398","View product details","","Mon Mar 09 08:51:05 UTC 2026","passed","Mon Mar 09 08:51:08 UTC 2026","","Product Management","View product details",""
+"  As a registered user
+  I want to log in
+  So that I can access my account","3483","Failed login - empty field","","Mon Mar 09 08:49:57 UTC 2026","passed","Mon Mar 09 08:50:01 UTC 2026","","User Login","Failed login - empty field",""
+"  As a logged in user
+  I want to manage products
+  So that I can browse and shop items","2191","View products by category","","Mon Mar 09 08:51:03 UTC 2026","passed","Mon Mar 09 08:51:05 UTC 2026","","Product Management","View products by category",""
+"  As a logged in user
+  I want to complete checkout
+  So that I can purchase products","28750","Payment with missing required fields","","Mon Mar 09 08:50:34 UTC 2026","passed","Mon Mar 09 08:51:03 UTC 2026","","Checkout and Payment","Payment with missing required fields",""
+"  As a logged in user
+  I want to manage products
+  So that I can browse and shop items","2967","Add product to cart","","Mon Mar 09 08:51:11 UTC 2026","passed","Mon Mar 09 08:51:14 UTC 2026","","Product Management","Add product to cart",""
+"  As a registered user
+  I want to log in
+  So that I can access my account","6121","Successful login","","Mon Mar 09 08:49:47 UTC 2026","passed","Mon Mar 09 08:49:53 UTC 2026","","User Login","Successful login",""
