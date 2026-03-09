@@ -1,49 +1,49 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"  As a logged in user
-  I want to complete checkout
-  So that I can purchase products","29129","Payment with missing required fields","","Mon Mar 09 16:21:29 UTC 2026","passed","Mon Mar 09 16:21:59 UTC 2026","","Checkout and Payment","Payment with missing required fields",""
-"  As a logged in user
-  I want to manage products
-  So that I can browse and shop items","2276","View product details","","Mon Mar 09 16:22:01 UTC 2026","passed","Mon Mar 09 16:22:03 UTC 2026","","Product Management","View product details",""
-"  As a logged in user
-  I want to complete checkout
-  So that I can purchase products","28995","Successful payment","","Mon Mar 09 16:21:00 UTC 2026","passed","Mon Mar 09 16:21:29 UTC 2026","","Checkout and Payment","Successful payment",""
+"  As a registered user
+  I want to log in
+  So that I can access my account","6208","Successful login","","Mon Mar 09 16:30:41 UTC 2026","passed","Mon Mar 09 16:30:47 UTC 2026","","User Login","Successful login",""
 "  As a logged in user
   I want to manage products
-  So that I can browse and shop items","2271","View products by category","","Mon Mar 09 16:21:59 UTC 2026","passed","Mon Mar 09 16:22:01 UTC 2026","","Product Management","View products by category",""
+  So that I can browse and shop items","2927","Add product to cart","","Mon Mar 09 16:32:05 UTC 2026","passed","Mon Mar 09 16:32:08 UTC 2026","","Product Management","Add product to cart",""
 "  As a logged in user
   I want to log out
-  So that my session ends securely","2188","Successful logout","","Mon Mar 09 16:20:56 UTC 2026","passed","Mon Mar 09 16:20:58 UTC 2026","","User Logout","Successful logout",""
-"  As a visitor
-  I want to create an account
-  So that I can log in to the application","1461","Failed registration - empty field","","Mon Mar 09 16:22:34 UTC 2026","passed","Mon Mar 09 16:22:35 UTC 2026","","User Signup","Failed registration - empty field",""
-"  As a visitor
-  I want to create an account
-  So that I can log in to the application","1971","Successful registration","","Mon Mar 09 16:22:28 UTC 2026","passed","Mon Mar 09 16:22:30 UTC 2026","","User Signup","Successful registration",""
-"  As a registered user
-  I want to log in
-  So that I can access my account","6335","Successful login","","Mon Mar 09 16:20:42 UTC 2026","passed","Mon Mar 09 16:20:49 UTC 2026","","User Login","Successful login",""
+  So that my session ends securely","2662","Logout button not visible when user is not logged in","","Mon Mar 09 16:30:57 UTC 2026","passed","Mon Mar 09 16:31:00 UTC 2026","","User Logout","Logout button not visible when user is not logged in",""
 "  As a logged in user
   I want to manage products
-  So that I can browse and shop items","3464","Add product to cart","","Mon Mar 09 16:22:03 UTC 2026","passed","Mon Mar 09 16:22:07 UTC 2026","","Product Management","Add product to cart",""
+  So that I can browse and shop items","2958","Add product to cart","","Mon Mar 09 16:32:02 UTC 2026","passed","Mon Mar 09 16:32:05 UTC 2026","","Product Management","Add product to cart",""
 "  As a registered user
   I want to log in
-  So that I can access my account","4048","Failed login - wrong password","","Mon Mar 09 16:20:49 UTC 2026","passed","Mon Mar 09 16:20:53 UTC 2026","","User Login","Failed login - wrong password",""
+  So that I can access my account","4078","Failed login - wrong password","","Mon Mar 09 16:30:47 UTC 2026","passed","Mon Mar 09 16:30:51 UTC 2026","","User Login","Failed login - wrong password",""
+"  As a registered user
+  I want to log in
+  So that I can access my account","3523","Failed login - empty field","","Mon Mar 09 16:30:51 UTC 2026","passed","Mon Mar 09 16:30:55 UTC 2026","","User Login","Failed login - empty field",""
 "  As a logged in user
   I want to manage products
-  So that I can browse and shop items","2866","Add product to cart","","Mon Mar 09 16:22:07 UTC 2026","passed","Mon Mar 09 16:22:09 UTC 2026","","Product Management","Add product to cart",""
+  So that I can browse and shop items","18708","Remove product from cart","","Mon Mar 09 16:32:08 UTC 2026","passed","Mon Mar 09 16:32:26 UTC 2026","","Product Management","Remove product from cart",""
 "  As a new user
   I want to complete a full purchase journey
-  So that I can register, login, buy a product, and logout successfully","44254","User completes full purchase journey","","Mon Mar 09 16:19:58 UTC 2026","passed","Mon Mar 09 16:20:42 UTC 2026","","Complete Purchase Flow","User completes full purchase journey",""
+  So that I can register, login, buy a product, and logout successfully","37910","User completes full purchase journey","","Mon Mar 09 16:30:03 UTC 2026","passed","Mon Mar 09 16:30:41 UTC 2026","","Complete Purchase Flow","User completes full purchase journey",""
 "  As a logged in user
   I want to manage products
-  So that I can browse and shop items","18657","Remove product from cart","","Mon Mar 09 16:22:09 UTC 2026","passed","Mon Mar 09 16:22:28 UTC 2026","","Product Management","Remove product from cart",""
+  So that I can browse and shop items","2085","View products by category","","Mon Mar 09 16:31:57 UTC 2026","passed","Mon Mar 09 16:31:59 UTC 2026","","Product Management","View products by category",""
 "  As a logged in user
-  I want to log out
-  So that my session ends securely","2186","Logout button not visible when user is not logged in","","Mon Mar 09 16:20:58 UTC 2026","passed","Mon Mar 09 16:21:00 UTC 2026","","User Logout","Logout button not visible when user is not logged in",""
-"  As a registered user
-  I want to log in
-  So that I can access my account","3447","Failed login - empty field","","Mon Mar 09 16:20:53 UTC 2026","passed","Mon Mar 09 16:20:56 UTC 2026","","User Login","Failed login - empty field",""
+  I want to manage products
+  So that I can browse and shop items","2485","View product details","","Mon Mar 09 16:31:59 UTC 2026","passed","Mon Mar 09 16:32:02 UTC 2026","","Product Management","View product details",""
 "  As a visitor
   I want to create an account
-  So that I can log in to the application","3875","Failed registration - duplicate username","","Mon Mar 09 16:22:30 UTC 2026","passed","Mon Mar 09 16:22:34 UTC 2026","","User Signup","Failed registration - duplicate username",""
+  So that I can log in to the application","1929","Successful registration","","Mon Mar 09 16:32:26 UTC 2026","passed","Mon Mar 09 16:32:28 UTC 2026","","User Signup","Successful registration",""
+"  As a visitor
+  I want to create an account
+  So that I can log in to the application","3815","Failed registration - duplicate username","","Mon Mar 09 16:32:28 UTC 2026","passed","Mon Mar 09 16:32:32 UTC 2026","","User Signup","Failed registration - duplicate username",""
+"  As a logged in user
+  I want to log out
+  So that my session ends securely","2158","Successful logout","","Mon Mar 09 16:30:55 UTC 2026","passed","Mon Mar 09 16:30:57 UTC 2026","","User Logout","Successful logout",""
+"  As a logged in user
+  I want to complete checkout
+  So that I can purchase products","28855","Successful payment","","Mon Mar 09 16:31:00 UTC 2026","passed","Mon Mar 09 16:31:29 UTC 2026","","Checkout and Payment","Successful payment",""
+"  As a visitor
+  I want to create an account
+  So that I can log in to the application","1393","Failed registration - empty field","","Mon Mar 09 16:32:32 UTC 2026","passed","Mon Mar 09 16:32:33 UTC 2026","","User Signup","Failed registration - empty field",""
+"  As a logged in user
+  I want to complete checkout
+  So that I can purchase products","28589","Payment with missing required fields","","Mon Mar 09 16:31:29 UTC 2026","passed","Mon Mar 09 16:31:57 UTC 2026","","Checkout and Payment","Payment with missing required fields",""
