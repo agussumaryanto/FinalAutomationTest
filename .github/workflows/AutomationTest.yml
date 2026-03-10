@@ -39,12 +39,6 @@ jobs:
           distribution: 'temurin'
           cache: gradle   # Cache gradle for speed
 
-      # Improves gradle caching & performance
-      - name: Setup Gradle Cache
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          cache-enabled: true
-
       # install browser
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v2.1.0
