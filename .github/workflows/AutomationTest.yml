@@ -96,8 +96,8 @@ jobs:
         with:
           name: report-api
           path: |
-           build/reports/cucumber/api_test_report.html
-           build/reports/cucumber/api_test_report.json
+           build/reports/cucumber/
+           build/reports/cucumber/
            build/allure-results/api
           if-no-files-found: warn
 
@@ -107,8 +107,8 @@ jobs:
         with:
           name: report-web
           path: |
-            build/reports/cucumber/webUi_test_report.html
-            build/reports/cucumber/webUi_test_report.json
+            build/reports/cucumber/
+            build/reports/cucumber/
             build/allure-results/web
             
 
@@ -164,8 +164,8 @@ jobs:
           mkdir -p $REPORT_DIR/api
           mkdir -p $REPORT_DIR/web
           
-          cp artifacts/report-api/api_test_report.* $REPORT_DIR/api/ || true
-          cp artifacts/report-web/webUi_test_report.* $REPORT_DIR/web/ || true
+          cp -r artifacts/report-api/cucumber/* $REPORT_DIR/api/ || true
+          cp -r artifacts/report-web/cucumber/* $REPORT_DIR/web/ || true
 
      # Deploy to GitHub Pages
       - name: Deploy report to Github Pages
