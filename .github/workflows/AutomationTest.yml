@@ -39,6 +39,10 @@ jobs:
           distribution: 'temurin'
           cache: gradle   # Cache gradle for speed
 
+      # Improves gradle caching & performance
+      - name: Setup Gradle Cache
+        uses: gradle/actions/setup-gradle@v3
+
       # install browser
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v2.1.0
@@ -58,7 +62,9 @@ jobs:
 
       - name: Generate Allure Report
         if: always()
-        run: ./gradlew allureReport
+        run: |
+          ./gradlew allureReport \ 
+          -Pallure.results.directory=build/allure-results/${{ matrix.test-type }}
 
       # Upload API & Web Report
       - name: Upload Cucumber Report
@@ -73,7 +79,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: allure-${{ matrix.test-type }}
-          path: build/reports/allure-report
+          path: build/reports/allure-report/allureReport
 
   # =========================================
   # DEPLOY TO GITHUB PAGES
@@ -113,8 +119,8 @@ jobs:
           cp -r artifacts/cucumber-web/* $REPORT_DIR/web/ || true
           
           # copy allure report including the folder contents 
-          cp -r artifacts/allure-api/allureReport/* $REPORT_DIR/allure-api/ || true
-          cp -r artifacts/allure-web/allureReport/* $REPORT_DIR/allure-web/ || true
+          cp -r artifacts/allure-api/* $REPORT_DIR/allure-api/ || true
+          cp -r artifacts/allure-web/* $REPORT_DIR/allure-web/ || true
 
      # Deploy to GitHub Pages
       - name: Deploy report to Github Pages

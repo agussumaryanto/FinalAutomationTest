@@ -4,10 +4,6 @@ plugins {
     id 'io.qameta.allure' version '3.0.0' // Add Allure plugin
 }
 
-allure {
-    version = '2.24.0'
-}
-
 group = 'com.example'
 version = '1.0-SNAPSHOT'
 
@@ -45,8 +41,8 @@ dependencies {
     testImplementation("com.fasterxml.jackson.core:jackson-core:2.21.1") // parsing & generate for webdrivermanager
 
     // Allure Cucumber adapter (optional, for a visually appealing allure report)
-    testImplementation 'io.qameta.allure:allure-cucumber7-jvm:2.25.0'
-    testImplementation 'io.qameta.allure:allure-junit5:2.27.0' // optional
+    testImplementation 'io.qameta.allure:allure-cucumber7-jvm:2.29.0'
+    testImplementation 'io.qameta.allure:allure-junit5:2.29.0' // optional
 
     // Logging & utilities
     testImplementation 'org.assertj:assertj-core:3.27.7' // Assertions / logging
@@ -66,6 +62,16 @@ test {
     }
 }
 
+// === Allure Configuration ===
+allure {
+    adapter {
+        frameworks {
+            junit5 {
+                enabled.set(true)
+            }
+        }
+    }
+}
 
 // === Custom task for Cucumber CLI ===
 
