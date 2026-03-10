@@ -69,7 +69,7 @@ jobs:
           name: report-${{ matrix.test-type }}
           path: | 
             build/reports/cucumber
-            build/reports/allure-report/allureReport
+            build/reports/allure-report
 
   # =========================================
   # DEPLOY TO GITHUB PAGES
