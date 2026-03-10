@@ -42,6 +42,13 @@ jobs:
       # install browser
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v2.1.0
+        with:
+          chrome-version: stable # Explicitly set stable Chrome
+
+      # Set DISPLAY & headless env for Web UI tests
+      - name: Set DISPLAY for Headless Chrome
+        if: matrix.test-type == 'web'
+        run: export DISPLAY=:99
 
       # setup gradlew
       - name: Setup gradlew
@@ -56,6 +63,7 @@ jobs:
             ./gradlew clean runWebTest --info --stacktrace
           fi
 
+      # Generate Allure report per test type
       - name: Generate Allure Report
         if: always()
         run: |
