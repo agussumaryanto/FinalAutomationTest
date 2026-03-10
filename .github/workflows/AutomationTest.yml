@@ -74,6 +74,13 @@ jobs:
             ./gradlew runWebTest --parallel --build-cache --info
           fi
 
+      # Debug report folder
+      - name: Debug Reports
+        if: always()
+        run: |
+          echo "=== REPORT STRUCTURE ==="
+          ls -R build || true
+
       # Generate Allure report per test type
       - name: Generate Allure Report
         if: always()
@@ -91,7 +98,7 @@ jobs:
           path: |
            build/reports/cucumber/api_test_report.html
            build/reports/cucumber/api_test_report.json
-           build/reports/allure/api
+           build/allure-results/api
           if-no-files-found: warn
 
       - name: Upload Web Reports
@@ -102,7 +109,7 @@ jobs:
           path: |
             build/reports/cucumber/webUi_test_report.html
             build/reports/cucumber/webUi_test_report.json
-            build/reports/allure/web
+            build/allure-results/web
             
 
   # =========================================
@@ -130,21 +137,28 @@ jobs:
           echo "=== ARTIFACT STRUCTURE ==="
           ls -R artifacts
 
-     # Folder structure
+      # Install Allure CLI
+      - name: Install Allure
+        run: |
+          sudo apt-add-repository ppa:qameta/allure
+          sudo apt-get update
+          sudo apt-get install allure -y
+
+      # Generate allure report from results
+      - name: Generate Allure Reports
+        run: |
+          allure generate artifacts/report-api/api -o reports/allure-api --clean || true
+          allure generate artifacts/report-web/web -o reports/allure-web --clean || true
+
+     # Folder structure (copy only cucumber report
       - name: Prepare Folder Structure
         run: |
           mkdir -p $REPORT_DIR/api
           mkdir -p $REPORT_DIR/web
-          mkdir -p $REPORT_DIR/allure-api
-          mkdir -p $REPORT_DIR/allure-web
           
           # copy cucumber report
           cp -r artifacts/report-api/api_test_report.* $REPORT_DIR/api/ || true
           cp -r artifacts/report-web/webUi_test_report.* $REPORT_DIR/web/ || true
-          
-          # copy allure report including the folder contents 
-          cp -r artifacts/report-api/api/* $REPORT_DIR/allure-api/ || true
-          cp -r artifacts/report-web/web/* $REPORT_DIR/allure-web/ || true
 
      # Deploy to GitHub Pages
       - name: Deploy report to Github Pages
