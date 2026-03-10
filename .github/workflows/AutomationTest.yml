@@ -79,8 +79,7 @@ jobs:
         with:
           name: report-${{ matrix.test-type }}
           path: |
-            build/reports/cucumber/${{ matrix.test-type }}*_report.html
-            build/reports/cucumber/${{ matrix.test-type }}*_report.json
+            build/reports/cucumber/*${{ matrix.test-type }}*_report.*
             build/reports/allure/${{ matrix.test-type }}
           if-no-files-found: warn
 
@@ -118,12 +117,12 @@ jobs:
           mkdir -p $REPORT_DIR/allure-web
           
           # copy cucumber report
-          cp -r artifacts/*api*/* $REPORT_DIR/api/ || true
-          cp -r artifacts/*web*/* $REPORT_DIR/web/ || true
+          cp -r artifacts/report-api/*api*_report.* $REPORT_DIR/api/ || true
+          cp -r artifacts/report-web/*web*_report.* $REPORT_DIR/web/ || true
           
           # copy allure report including the folder contents 
-          cp -r artifacts/allure/api/* $REPORT_DIR/allure-api/ || true
-          cp -r artifacts/allure/web/* $REPORT_DIR/allure-web/ || true
+          cp -r artifacts/report-api/allure/* $REPORT_DIR/allure-api/ || true
+          cp -r artifacts/report-web/allure/* $REPORT_DIR/allure-web/ || true
 
      # Deploy to GitHub Pages
       - name: Deploy report to Github Pages
