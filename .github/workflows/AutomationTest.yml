@@ -164,8 +164,11 @@ jobs:
           mkdir -p $REPORT_DIR/api
           mkdir -p $REPORT_DIR/web
           
-          cp -r artifacts/report-api/cucumber/* $REPORT_DIR/api/ || true
-          cp -r artifacts/report-web/cucumber/* $REPORT_DIR/web/ || true
+          if [ -d "artifacts/report-api/cucumber" ]; then
+            cp -r artifacts/report-api/cucumber/* $REPORT_DIR/api/ || true
+          fi
+          if [ -d "artifacts/report-web/cucumber" ]; then
+            cp -r artifacts/report-web/cucumber/* $REPORT_DIR/web/ || true
 
      # Deploy to GitHub Pages
       - name: Deploy report to Github Pages
