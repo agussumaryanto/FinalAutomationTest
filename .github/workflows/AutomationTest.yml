@@ -169,6 +169,7 @@ jobs:
           fi
           if [ -d "artifacts/report-web/cucumber" ]; then
             cp -r artifacts/report-web/cucumber/* $REPORT_DIR/web/ || true
+          fi
 
      # Deploy to GitHub Pages
       - name: Deploy report to Github Pages
