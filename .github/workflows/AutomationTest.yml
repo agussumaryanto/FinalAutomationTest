@@ -75,10 +75,17 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: report-${{ matrix.test-type }}
-          path: | 
-            build/reports/cucumber
-            build/reports/allure-report
+          name: cucumber-${{ matrix.test-type }}
+          path: build/reports/cucumber/${{ matrix.test-type }}
+          if-no-files-found: warn  # Prevent workflow fail if folder is empty
+
+      - name: Upload Allure Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-${{ matrix.test-type }}
+          path: build/reports/allure/${{ matrix.test-type }}
+          if-no-files-found: warn
 
   # =========================================
   # DEPLOY TO GITHUB PAGES
