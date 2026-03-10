@@ -13,6 +13,7 @@ permissions:
 env:
   JAVA_VERSION: 21
   REPORT_DIR: reports # folder report in gh-pages branch
+  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.parallel=true   # Performance test
 
 jobs:
   # =========================================
@@ -59,9 +60,9 @@ jobs:
       - name: Execute Test Suite
         run: |
           if [ "${{ matrix.test-type }}" = "api" ]; then
-            ./gradlew clean runApiTest --info --stacktrace
+            ./gradlew runApiTest --parallel --build-cache --info
           else
-            ./gradlew clean runWebTest --info --stacktrace
+            ./gradlew runWebTest --parallel --build-cache --info
           fi
 
       # Generate Allure report per test type
@@ -129,8 +130,8 @@ jobs:
           mkdir -p $REPORT_DIR/allure-web
           
           # copy cucumber report
-          cp -r artifacts/report-api/*_report.* $REPORT_DIR/api/ || true
-          cp -r artifacts/report-web/*_report.* $REPORT_DIR/web/ || true
+          cp -r artifacts/report-api/api_test_report.* $REPORT_DIR/api/ || true
+          cp -r artifacts/report-web/webUi_test_report.* $REPORT_DIR/web/ || true
           
           # copy allure report including the folder contents 
           cp -r artifacts/report-api/api/* $REPORT_DIR/allure-api/ || true
