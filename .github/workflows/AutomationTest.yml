@@ -41,13 +41,14 @@ jobs:
 
       # install browser
       - name: Setup Chrome
+        if: matrix.test-type == 'web' # Web only
         uses: browser-actions/setup-chrome@v2.1.0
         with:
           chrome-version: stable # Explicitly set stable Chrome
 
       # Set Chrome options for Headless Web UI
       - name: Set Chrome options for Headless
-        if: matrix.test-type == 'web'
+        if: matrix.test-type == 'web' # Web only
         run: |
           export CHROME_OPTS="--headless --no-sandbox --disable-dev-shm-usage"
 
@@ -81,6 +82,7 @@ jobs:
           path: | 
             build/reports/cucumber/${{ matrix.test-type }}
             build/reports/allure/${{ matrix.test-type }}
+          if-no-files-found: warn
 
   # =========================================
   # DEPLOY TO GITHUB PAGES
