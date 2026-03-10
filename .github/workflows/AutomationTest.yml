@@ -42,6 +42,8 @@ jobs:
       # Improves gradle caching & performance
       - name: Setup Gradle Cache
         uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-enabled: true
 
       # install browser
       - name: Setup Chrome
@@ -70,15 +72,10 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cucumber-${{ matrix.test-type }}
-          path: build/reports/cucumber
-
-      - name: Upload Allure Report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-${{ matrix.test-type }}
-          path: build/reports/allure-report/allureReport
+          name: report-${{ matrix.test-type }}
+          path: | 
+            build/reports/cucumber
+            build/reports/allure-report/allureReport
 
   # =========================================
   # DEPLOY TO GITHUB PAGES
