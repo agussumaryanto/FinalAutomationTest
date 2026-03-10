@@ -63,8 +63,7 @@ jobs:
       - name: Generate Allure Report
         if: always()
         run: |
-          ./gradlew allureReport \ 
-          -Pallure.results.directory=build/allure-results/${{ matrix.test-type }}
+          ./gradlew allureReport -Pallure.results.directory=build/allure-results/${{ matrix.test-type }}
 
       # Upload API & Web Report
       - name: Upload Cucumber Report
