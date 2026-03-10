@@ -92,7 +92,8 @@ tasks.register('runApiTest', JavaExec) {
 
     systemProperties = [
             "allure.results.directory":
-                    layout.buildDirectory.dir("allure-results/api").get().asFile.absolutePath
+                    layout.buildDirectory.dir("allure-results/api").get().asFile.absolutePath,
+            "allure.report.directory" : layout.buildDirectory.dir("reports/allure/api").get().asFile.absolutePath
     ]
 
     // Run all features in the resources/api_features folder
@@ -123,6 +124,7 @@ tasks.register("runWebTest", JavaExec) {
     systemProperties = [
             "allure.results.directory"       :
                     layout.buildDirectory.dir("allure-results/web").get().asFile.absolutePath,
+            "allure.report.directory" : layout.buildDirectory.dir("reports/allure/web").get().asFile.absolutePath,
             "webdriver.chrome.verboseLogging": "true" // Chrome logs
     ]
 

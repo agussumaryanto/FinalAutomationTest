@@ -122,8 +122,8 @@ jobs:
           cp -r artifacts/*web*/* $REPORT_DIR/web/ || true
           
           # copy allure report including the folder contents 
-          cp -r artifacts/*allure-api*/* $REPORT_DIR/allure-api/ || true
-          cp -r artifacts/*allure-api*/* $REPORT_DIR/allure-web/ || true
+          cp -r artifacts/allure/api/* $REPORT_DIR/allure-api/ || true
+          cp -r artifacts/allure/web/* $REPORT_DIR/allure-web/ || true
 
      # Deploy to GitHub Pages
       - name: Deploy report to Github Pages
