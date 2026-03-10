@@ -40,6 +40,15 @@ jobs:
           distribution: 'temurin'
           cache: gradle   # Cache gradle for speed
 
+      # Performance: cache gradle wrapper
+      - name: Cache Gradle Wrapper
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/wrapper
+            ~/.gradle/caches
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+
       # install browser
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v2.1.0
