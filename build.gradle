@@ -64,7 +64,6 @@ test {
 
 // === Allure Configuration (no resultsDir/reportDir because of Allure 3.x) ===
 allure {
-    version = '2.29.0'  // CLI version
     adapter {
         frameworks {
             junit5 {
@@ -122,8 +121,9 @@ tasks.register("runWebTest", JavaExec) {
     mainClass.set("io.cucumber.core.cli.Main")
 
     systemProperties = [
-            "allure.results.directory":
-                    layout.buildDirectory.dir("allure-results/web").get().asFile.absolutePath
+            "allure.results.directory"       :
+                    layout.buildDirectory.dir("allure-results/web").get().asFile.absolutePath,
+            "webdriver.chrome.verboseLogging": "true" // Chrome logs
     ]
 
     // Run all features in the resources/web_features folder

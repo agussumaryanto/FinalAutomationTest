@@ -45,10 +45,11 @@ jobs:
         with:
           chrome-version: stable # Explicitly set stable Chrome
 
-      # Set DISPLAY & headless env for Web UI tests
-      - name: Set DISPLAY for Headless Chrome
+      # Set Chrome options for Headless Web UI
+      - name: Set Chrome options for Headless
         if: matrix.test-type == 'web'
-        run: export DISPLAY=:99
+        run: |
+          export CHROME_OPTS="--headless --no-sandbox --disable-dev-shm-usage"
 
       # setup gradlew
       - name: Setup gradlew
@@ -58,26 +59,28 @@ jobs:
       - name: Execute Test Suite
         run: |
           if [ "${{ matrix.test-type }}" = "api" ]; then
-            ./gradlew clean runApiTest --info --stacktrace
+            ./gradlew runApiTest --info --stacktrace
           else
-            ./gradlew clean runWebTest --info --stacktrace
+            ./gradlew runWebTest --info --stacktrace
           fi
 
       # Generate Allure report per test type
       - name: Generate Allure Report
         if: always()
         run: |
-          ./gradlew allureReport -Pallure.results.directory=build/allure-results/${{ matrix.test-type }}
+          ./gradlew allureReport \
+            -Pallure.results.directory=build/allure-results/${{ matrix.test-type }} \
+            -Pallure.report.directory=build/reports/allure/${{ matrix.test-type }}
 
-      # Upload API & Web Report
+      # Upload API & Web Report (per test-type)
       - name: Upload Cucumber Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: report-${{ matrix.test-type }}
           path: | 
-            build/reports/cucumber
-            build/reports/allure-report
+            build/reports/cucumber/${{ matrix.test-type }}
+            build/reports/allure/${{ matrix.test-type }}
 
   # =========================================
   # DEPLOY TO GITHUB PAGES
