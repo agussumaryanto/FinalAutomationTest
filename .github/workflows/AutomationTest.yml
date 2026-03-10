@@ -137,18 +137,26 @@ jobs:
           echo "=== ARTIFACT STRUCTURE ==="
           ls -R artifacts
 
-      # Install Allure CLI
+      # Install Allure CLI manually (compatible with Ubuntu 24.04)
       - name: Install Allure
         run: |
-          sudo apt-add-repository ppa:qameta/allure
-          sudo apt-get update
-          sudo apt-get install allure -y
+          wget https://github.com/allure-framework/allure2/releases/download/2.27.0/allure-2.27.0.tgz
+          tar -zxvf allure-2.27.0.tgz
+          sudo mv allure-2.27.0 /opt/allure
+          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+          allure --version
 
       # Generate allure report from results
       - name: Generate Allure Reports
         run: |
+          mkdir -p reports/allure-api
+          mkdir -p reports/allure-web
+          
           allure generate artifacts/report-api/api -o reports/allure-api --clean || true
           allure generate artifacts/report-web/web -o reports/allure-web --clean || true
+
+      - name: Show Allure Report Structure
+        run: ls -R reports
 
      # Folder structure (copy only cucumber report
       - name: Prepare Folder Structure
@@ -156,9 +164,8 @@ jobs:
           mkdir -p $REPORT_DIR/api
           mkdir -p $REPORT_DIR/web
           
-          # copy cucumber report
-          cp -r artifacts/report-api/api_test_report.* $REPORT_DIR/api/ || true
-          cp -r artifacts/report-web/webUi_test_report.* $REPORT_DIR/web/ || true
+          cp artifacts/report-api/api_test_report.* $REPORT_DIR/api/ || true
+          cp artifacts/report-web/webUi_test_report.* $REPORT_DIR/web/ || true
 
      # Deploy to GitHub Pages
       - name: Deploy report to Github Pages
