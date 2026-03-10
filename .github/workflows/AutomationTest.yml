@@ -74,7 +74,7 @@ jobs:
 
       # Upload API & Web Report
       - name: Upload API Reports
-        if: always()
+        if: matrix.test-type == 'api'
         uses: actions/upload-artifact@v4
         with:
           name: report-api
@@ -85,7 +85,7 @@ jobs:
           if-no-files-found: warn
 
       - name: Upload Web Reports
-        if: always()
+        if: matrix.test-type == 'web'
         uses: actions/upload-artifact@v4
         with:
           name: report-web
@@ -128,8 +128,8 @@ jobs:
           mkdir -p $REPORT_DIR/allure-web
           
           # copy cucumber report
-          cp -r artifacts/report-api/*api*_report.* $REPORT_DIR/api/ || true
-          cp -r artifacts/report-web/*web*_report.* $REPORT_DIR/web/ || true
+          cp -r artifacts/report-api/* $REPORT_DIR/api/ || true
+          cp -r artifacts/report-web/* $REPORT_DIR/web/ || true
           
           # copy allure report including the folder contents 
           cp -r artifacts/report-api/allure/* $REPORT_DIR/allure-api/ || true
