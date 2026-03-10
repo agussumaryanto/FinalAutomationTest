@@ -44,13 +44,13 @@ public class CartPage extends BasePage {
         List<WebElement> rows = driver.findElements(cartRows);
         for (WebElement row : rows) {
             WebElement productCell = row.findElement(By.xpath("./td[2]"));
-            if (productCell.getText().equalsIgnoreCase(productName)) {
-                row.findElement(deleteButton).click();
+            String productText = productCell.getText().trim(); // take text more safely
+            if (productText.equalsIgnoreCase(productName)) {
+                WebElement deleteBtn = row.findElement(deleteButton); // clearer elements
+                deleteBtn.click();
                 // WAIT until the product is completely gone from the DOM (Document Object Model) structure
                 waitHelper.waitUntil(
-                        ExpectedConditions.invisibilityOfElementLocated(
-                                By.xpath("//td[text()='" + productName + "']")
-                        )
+                        ExpectedConditions.stalenessOf(row)
                 );
                 return;
             }
