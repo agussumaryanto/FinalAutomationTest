@@ -74,7 +74,7 @@ jobs:
             ./gradlew runWebTest --parallel --build-cache --info
           fi
 
-      # Debug report folder
+      # Debug report folder to ensure report file exist
       - name: Debug Reports
         if: always()
         run: |
@@ -152,8 +152,8 @@ jobs:
           mkdir -p reports/allure-api
           mkdir -p reports/allure-web
           
-          allure generate artifacts/report-api/api -o reports/allure-api --clean || true
-          allure generate artifacts/report-web/web -o reports/allure-web --clean || true
+          allure generate artifacts/report-api/allure-results -o reports/allure-api --clean || true
+          allure generate artifacts/report-web/allure-results -o reports/allure-web --clean || true
 
       - name: Show Allure Report Structure
         run: ls -R reports
