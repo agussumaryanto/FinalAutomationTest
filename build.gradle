@@ -62,8 +62,9 @@ test {
     }
 }
 
-// === Allure Configuration ===
+// === Allure Configuration (no resultsDir/reportDir because of Allure 3.x) ===
 allure {
+    version = '2.29.0'  // CLI version
     adapter {
         frameworks {
             junit5 {
