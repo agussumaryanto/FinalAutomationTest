@@ -90,27 +90,14 @@ jobs:
             -Pallure.report.directory=build/reports/allure/${{ matrix.test-type }}
 
       # Upload API & Web Report
-      - name: Upload API Reports
-        if: matrix.test-type == 'api'
+      - name: Upload Reports
         uses: actions/upload-artifact@v4
         with:
-          name: report-api
+          name: report-${{ matrix.test-type }}
           path: |
-           build/reports/cucumber/
-           build/reports/cucumber/
-           build/allure-results/api
+            build/reports/cucumber/${{ matrix.test-type }}*_report.*   # HTML + JSON
+            build/allure-results/${{ matrix.test-type }}               # Allure results folder
           if-no-files-found: warn
-
-      - name: Upload Web Reports
-        if: matrix.test-type == 'web'
-        uses: actions/upload-artifact@v4
-        with:
-          name: report-web
-          path: |
-            build/reports/cucumber/
-            build/reports/cucumber/
-            build/allure-results/web
-            
 
   # =========================================
   # DEPLOY TO GITHUB PAGES
