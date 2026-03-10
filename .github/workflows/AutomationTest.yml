@@ -93,6 +93,7 @@ jobs:
             build/reports/cucumber/webUi_test_report.html
             build/reports/cucumber/webUi_test_report.json
             build/reports/allure/web
+            
 
   # =========================================
   # DEPLOY TO GITHUB PAGES
@@ -128,12 +129,12 @@ jobs:
           mkdir -p $REPORT_DIR/allure-web
           
           # copy cucumber report
-          cp -r artifacts/report-api/* $REPORT_DIR/api/ || true
-          cp -r artifacts/report-web/* $REPORT_DIR/web/ || true
+          cp -r artifacts/report-api/*_report.* $REPORT_DIR/api/ || true
+          cp -r artifacts/report-web/*_report.* $REPORT_DIR/web/ || true
           
           # copy allure report including the folder contents 
-          cp -r artifacts/report-api/allure/* $REPORT_DIR/allure-api/ || true
-          cp -r artifacts/report-web/allure/* $REPORT_DIR/allure-web/ || true
+          cp -r artifacts/report-api/api/* $REPORT_DIR/allure-api/ || true
+          cp -r artifacts/report-web/web/* $REPORT_DIR/allure-web/ || true
 
      # Deploy to GitHub Pages
       - name: Deploy report to Github Pages
