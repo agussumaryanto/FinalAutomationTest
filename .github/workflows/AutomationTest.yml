@@ -136,6 +136,8 @@ jobs:
         run: |
           mkdir -p $REPORT_DIR/api
           mkdir -p $REPORT_DIR/web
+          mkdir -p $REPORT_DIR/allure-api
+          mkdir -p $REPORT_DIR/allure-web
           
           if [ -d "artifacts/report-api/reports" ]; then
             cp -r artifacts/report-api/reports/* $REPORT_DIR/api/ || true
