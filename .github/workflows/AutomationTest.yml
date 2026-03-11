@@ -85,33 +85,6 @@ jobs:
             build/allure-results
           if-no-files-found: warn
 
-      # Create dashboard homepage
-      - name: Create Dashboard index.html
-        run: |
-          cat <<EOF > $REPORT_DIR/index.html
-          <html>
-          <head>
-              <title>Automation Test Dashboard</title>
-              <style>
-                  body { font-family: Arial; text-align:center; }
-                  a { display:block; margin:10px; font-size:20px; }
-              </style>
-          </head>
-          <body>
-              <h1>Automation Test Dashboard</h1>
-
-              <h2>API Test</h2>
-              <a href="api/api_test_report.html">Cucumber API Report</a>
-              <a href="allure-api/index.html">Allure API Report</a>
-
-              <h2>Web UI Test</h2>
-              <a href="web/web_test_report.html">Cucumber Web Report</a>
-              <a href="allure-web/index.html">Allure Web Report</a>
-
-          </body>
-          </html>
-          EOF
-
   # =========================================
   # DEPLOY TO GITHUB PAGES
   # =========================================
@@ -170,6 +143,34 @@ jobs:
           if [ -d "artifacts/report-web/reports" ]; then
             cp -r artifacts/report-web/reports/* $REPORT_DIR/web/ || true
           fi
+
+  # Create GitHub Pages dashboard
+      - name: Create Dashboard index.html
+        run: |
+          cat <<EOF > $REPORT_DIR/index.html
+          <html>
+          <head>
+              <title>Automation Test Dashboard</title>
+              <style>
+                  body { font-family: Arial; text-align:center; }
+                  a { display:block; margin:10px; font-size:20px; }
+              </style>
+          </head>
+          <body>
+
+              <h1>Automation Test Dashboard</h1>
+
+              <h2>API Test</h2>
+              <a href="api/api_test_report.html">Cucumber API Report</a>
+              <a href="allure-api/index.html">Allure API Report</a>
+
+              <h2>Web UI Test</h2>
+              <a href="web/web_test_report.html">Cucumber Web Report</a>
+              <a href="allure-web/index.html">Allure Web Report</a>
+
+          </body>
+          </html>
+          EOF
 
      # Deploy to GitHub Pages
       - name: Deploy report to Github Pages
