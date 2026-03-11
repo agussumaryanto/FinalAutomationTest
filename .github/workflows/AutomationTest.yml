@@ -55,12 +55,6 @@ jobs:
         with:
           chrome-version: stable # Explicitly set stable Chrome
 
-      # Set Chrome options for Headless Web UI
-      - name: Set Chrome options for Headless
-        if: matrix.test-type == 'web'
-        run: |
-          export CHROME_OPTS="--headless --no-sandbox --disable-dev-shm-usage"
-
       # setup gradlew
       - name: Setup gradlew
         run: chmod +x gradlew
@@ -69,9 +63,9 @@ jobs:
       - name: Execute Test Suite
         run: |
           if [ "${{ matrix.test-type }}" = "api" ]; then
-            ./gradlew runApiTest --parallel --build-cache --info
+            ./gradlew runApiTest --parallel --build-cache --info --stacktrace
           else
-            ./gradlew runWebTest --parallel --build-cache --info
+            ./gradlew runWebTest --parallel --build-cache --info --stacktrace
           fi
 
       # Debug report folder to ensure report file exist
@@ -81,22 +75,14 @@ jobs:
           echo "=== REPORT STRUCTURE ==="
           ls -R build || true
 
-      # Generate Allure report per test type
-      - name: Generate Allure Report
-        if: always()
-        run: |
-          ./gradlew allureReport \
-            -Pallure.results.directory=build/allure-results/${{ matrix.test-type }} \
-            -Pallure.report.directory=build/reports/allure/${{ matrix.test-type }}
-
       # Upload API & Web Report
       - name: Upload Reports
         uses: actions/upload-artifact@v4
         with:
           name: report-${{ matrix.test-type }}
           path: |
-            build/reports/cucumber/${{ matrix.test-type }}*_report.*   # HTML + JSON
-            build/allure-results/${{ matrix.test-type }}               # Allure results folder
+            build/reports
+            build/allure-results
           if-no-files-found: warn
 
   # =========================================
@@ -151,11 +137,11 @@ jobs:
           mkdir -p $REPORT_DIR/api
           mkdir -p $REPORT_DIR/web
           
-          if [ -d "artifacts/report-api/cucumber" ]; then
-            cp -r artifacts/report-api/cucumber/* $REPORT_DIR/api/ || true
+          if [ -d "artifacts/report-api/reports" ]; then
+            cp -r artifacts/report-api/reports/* $REPORT_DIR/api/ || true
           fi
-          if [ -d "artifacts/report-web/cucumber" ]; then
-            cp -r artifacts/report-web/cucumber/* $REPORT_DIR/web/ || true
+          if [ -d "artifacts/report-web/reports" ]; then
+            cp -r artifacts/report-web/reports/* $REPORT_DIR/web/ || true
           fi
 
      # Deploy to GitHub Pages
