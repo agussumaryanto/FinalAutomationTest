@@ -14,7 +14,6 @@ env:
   JAVA_VERSION: 21
   REPORT_DIR: reports # folder report in gh-pages branch
   GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.parallel=true   # Performance test
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  # fix warning Node20
 
 jobs:
   # =========================================
@@ -85,6 +84,33 @@ jobs:
             build/reports
             build/allure-results
           if-no-files-found: warn
+
+      # Create dashboard homepage
+      - name: Create Dashboard index.html
+        run: |
+          cat <<EOF > $REPORT_DIR/index.html
+          <html>
+          <head>
+              <title>Automation Test Dashboard</title>
+              <style>
+                  body { font-family: Arial; text-align:center; }
+                  a { display:block; margin:10px; font-size:20px; }
+              </style>
+          </head>
+          <body>
+              <h1>Automation Test Dashboard</h1>
+
+              <h2>API Test</h2>
+              <a href="api/api_test_report.html">Cucumber API Report</a>
+              <a href="allure-api/index.html">Allure API Report</a>
+
+              <h2>Web UI Test</h2>
+              <a href="web/web_test_report.html">Cucumber Web Report</a>
+              <a href="allure-web/index.html">Allure Web Report</a>
+
+          </body>
+          </html>
+          EOF
 
   # =========================================
   # DEPLOY TO GITHUB PAGES
