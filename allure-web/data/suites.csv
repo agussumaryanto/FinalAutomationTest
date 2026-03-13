@@ -1,0 +1,49 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Fri Mar 13 15:10:35 UTC 2026","Fri Mar 13 15:10:39 UTC 2026","3959","","Product Management","","Remove product from cart","","Remove product from cart","  As a logged in user
+  I want to manage products
+  So that I can browse and shop items"
+"passed","Fri Mar 13 15:10:32 UTC 2026","Fri Mar 13 15:10:35 UTC 2026","3146","","Product Management","","Add product to cart","","Add product to cart","  As a logged in user
+  I want to manage products
+  So that I can browse and shop items"
+"passed","Fri Mar 13 15:09:16 UTC 2026","Fri Mar 13 15:09:20 UTC 2026","3648","","User Login","","Failed login - empty field","","Failed login - empty field","  As a registered user
+  I want to log in
+  So that I can access my account"
+"passed","Fri Mar 13 15:09:05 UTC 2026","Fri Mar 13 15:09:12 UTC 2026","7148","","User Login","","Successful login","","Successful login","  As a registered user
+  I want to log in
+  So that I can access my account"
+"passed","Fri Mar 13 15:10:24 UTC 2026","Fri Mar 13 15:10:26 UTC 2026","2282","","Product Management","","View products by category","","View products by category","  As a logged in user
+  I want to manage products
+  So that I can browse and shop items"
+"passed","Fri Mar 13 15:09:20 UTC 2026","Fri Mar 13 15:09:23 UTC 2026","2930","","User Logout","","Successful logout","","Successful logout","  As a logged in user
+  I want to log out
+  So that my session ends securely"
+"passed","Fri Mar 13 15:10:41 UTC 2026","Fri Mar 13 15:10:45 UTC 2026","4040","","User Signup","","Failed registration - duplicate username","","Failed registration - duplicate username","  As a visitor
+  I want to create an account
+  So that I can log in to the application"
+"passed","Fri Mar 13 15:09:55 UTC 2026","Fri Mar 13 15:10:24 UTC 2026","29091","","Checkout and Payment","","Payment with missing required fields","","Payment with missing required fields","  As a logged in user
+  I want to complete checkout
+  So that I can purchase products"
+"passed","Fri Mar 13 15:09:23 UTC 2026","Fri Mar 13 15:09:25 UTC 2026","2279","","User Logout","","Logout button not visible when user is not logged in","","Logout button not visible when user is not logged in","  As a logged in user
+  I want to log out
+  So that my session ends securely"
+"passed","Fri Mar 13 15:10:39 UTC 2026","Fri Mar 13 15:10:41 UTC 2026","2077","","User Signup","","Successful registration","","Successful registration","  As a visitor
+  I want to create an account
+  So that I can log in to the application"
+"passed","Fri Mar 13 15:10:29 UTC 2026","Fri Mar 13 15:10:32 UTC 2026","3147","","Product Management","","Add product to cart","","Add product to cart","  As a logged in user
+  I want to manage products
+  So that I can browse and shop items"
+"passed","Fri Mar 13 15:10:26 UTC 2026","Fri Mar 13 15:10:29 UTC 2026","2581","","Product Management","","View product details","","View product details","  As a logged in user
+  I want to manage products
+  So that I can browse and shop items"
+"passed","Fri Mar 13 15:10:45 UTC 2026","Fri Mar 13 15:10:47 UTC 2026","1580","","User Signup","","Failed registration - empty field","","Failed registration - empty field","  As a visitor
+  I want to create an account
+  So that I can log in to the application"
+"passed","Fri Mar 13 15:08:19 UTC 2026","Fri Mar 13 15:09:05 UTC 2026","46504","","Complete Purchase Flow","","User completes full purchase journey","","User completes full purchase journey","  As a new user
+  I want to complete a full purchase journey
+  So that I can register, login, buy a product, and logout successfully"
+"passed","Fri Mar 13 15:09:12 UTC 2026","Fri Mar 13 15:09:16 UTC 2026","4171","","User Login","","Failed login - wrong password","","Failed login - wrong password","  As a registered user
+  I want to log in
+  So that I can access my account"
+"passed","Fri Mar 13 15:09:25 UTC 2026","Fri Mar 13 15:09:55 UTC 2026","29369","","Checkout and Payment","","Successful payment","","Successful payment","  As a logged in user
+  I want to complete checkout
+  So that I can purchase products"
