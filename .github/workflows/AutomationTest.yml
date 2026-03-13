@@ -146,10 +146,14 @@ jobs:
           mkdir -p $REPORT_DIR/web
           mkdir -p $REPORT_DIR/allure-api
           mkdir -p $REPORT_DIR/allure-web       
-          
-          # Copy cucumber report
-          cp artifacts/report-api/reports/cucumber/api_test_report.html $REPORT_DIR/api/ || true
-          cp artifacts/report-web/reports/cucumber/web_test_report.html $REPORT_DIR/web/ || true
+
+          # Copy cucumber API report
+          cp artifacts/report-api/reports/cucumber/*.html "$REPORT_DIR/api/" 2>/dev/null || true
+          cp artifacts/report-api/reports/cucumber/*.json "$REPORT_DIR/api/" 2>/dev/null || true
+
+          # Copy cucumber Web report
+          cp artifacts/report-web/reports/cucumber/*.html "$REPORT_DIR/web/" 2>/dev/null || true
+          cp artifacts/report-web/reports/cucumber/*.json "$REPORT_DIR/web/" 2>/dev/null || true
           
           # Copy allure report
           cp -r reports/allure-api/* $REPORT_DIR/allure-api/ || true
