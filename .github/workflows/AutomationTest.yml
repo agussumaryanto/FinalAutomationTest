@@ -32,6 +32,8 @@ jobs:
     steps:
       # download repository
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # setup java
       - name: Set up JDK 21
@@ -140,18 +142,19 @@ jobs:
           mkdir -p $REPORT_DIR/allure-api
           mkdir -p $REPORT_DIR/allure-web
           
-          if [ -d "artifacts/report-api/reports" ]; then
-            cp -r artifacts/report-api/reports/* $REPORT_DIR/api/ || true
-          fi
-          if [ -d "artifacts/report-web/reports" ]; then
-            cp -r artifacts/report-web/reports/* $REPORT_DIR/web/ || true
-          fi
-          if [ -d "reports/allure-api" ]; then
-            cp -r reports/allure-api/* $REPORT_DIR/allure-api/ || true
-          fi
-          if [ -d "reports/allure-web" ]; then
-            cp -r reports/allure-web/* $REPORT_DIR/allure-web/ || true
-          fi
+        # Copy only HTML report
+          cp artifacts/report-api/reports/cucumber/api_test_report.html $REPORT_DIR/api/ || true
+          cp artifacts/report-web/reports/cucumber/web_test_report.html $REPORT_DIR/web/ || true
+          
+        # Copy allure report
+          cp -r reports/allure-api/* $REPORT_DIR/allure-api/ || true
+          cp -r reports/allure-web/* $REPORT_DIR/allure-web/ || true
+
+      # Debug final folder
+      - name: Debug Final Pages Structure
+        run: |
+          echo "=== FINAL REPORT STRUCTURE ==="
+          ls -R $REPORT_DIR
 
   # Create GitHub Pages dashboard
       - name: Create Dashboard index.html
