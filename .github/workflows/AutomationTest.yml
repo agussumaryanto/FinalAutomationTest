@@ -76,6 +76,13 @@ jobs:
             ./gradlew runWebTest --parallel --build-cache --info --stacktrace
           fi
 
+      # Check if allure-results are actually created
+      - name: Debug Allure Results
+        if: always()
+        run: |
+          echo "=== ALLURE RESULTS ==="
+          ls -R build/allure-results || echo "Allure results not found"
+
       # Debug report folder to ensure report file exist
       - name: Debug Reports
         if: always()
@@ -127,14 +134,25 @@ jobs:
           sudo ln -s /opt/allure/bin/allure /usr/bin/allure
           allure --version
 
-      # Generate allure report from results
+      # Generate allure report from results, only if the folder exists
       - name: Generate Allure Reports
         run: |
           mkdir -p reports/allure-api
           mkdir -p reports/allure-web
           
-          allure generate artifacts/report-api/allure-results -o reports/allure-api --clean || true
-          allure generate artifacts/report-web/allure-results -o reports/allure-web --clean || true
+          if [ -d artifacts/report-api/allure-results ]; then
+            echo "Generating API Allure Report"
+            allure generate artifacts/report-api/allure-results -o reports/allure-api --clean
+          else
+            echo "API allure-results not found"
+          fi
+
+          if [ -d artifacts/report-web/allure-results ]; then
+            echo "Generating WEB Allure Report"
+            allure generate artifacts/report-web/allure-results -o reports/allure-web --clean
+          else
+            echo "WEB allure-results not found"
+          fi
 
       - name: Show Allure Report Structure
         run: ls -R reports
@@ -156,8 +174,8 @@ jobs:
           cp artifacts/report-web/reports/cucumber/*.json "$REPORT_DIR/web/" 2>/dev/null || true
           
           # Copy allure report
-          cp -r reports/allure-api/* $REPORT_DIR/allure-api/ || true
-          cp -r reports/allure-web/* $REPORT_DIR/allure-web/ || true
+          cp -r reports/allure-api/* "$REPORT_DIR/allure-api/" 2>/dev/null || true
+          cp -r reports/allure-web/* "$REPORT_DIR/allure-web/" 2>/dev/null || true
 
       # Debug final folder
       - name: Debug Final Pages Structure
