@@ -146,18 +146,31 @@ jobs:
           echo "Checking WEB results"
           ls -R artifacts/report-web/allure-results || true
           
-          if [ -d artifacts/report-api/allure-results ]; then
+          # Flatten allure-results if there is a subfolder api/
+          if [ -d artifacts/report-api/allure-results/api ]; then
+            echo "Flatten API allure-results"
+            cp artifacts/report-api/allure-results/api/* artifacts/report-api/allure-results/
+          fi
+
+          # flatten allure-results if there is a subfolder web/
+          if [ -d artifacts/report-web/allure-results/web ]; then
+            echo "Flatten WEB allure-results"
+            cp artifacts/report-web/allure-results/web/* artifacts/report-web/allure-results/
+          fi
+
+          # Only generate if JSON actually exists
+          if [ -n "$(ls -A artifacts/report-api/allure-results 2>/dev/null)" ]; then
             echo "Generating API Allure Report"
             allure generate artifacts/report-api/allure-results --clean -o reports/allure-api
           else
-            echo "API allure-results not found"
+            echo "API allure-results empty"
           fi
 
-          if [ -d artifacts/report-web/allure-results ]; then
-            echo "Generating WEB Allure Report"
+          if [ -n "$(ls -A artifacts/report-web/allure-results 2>/dev/null)" ]; then
+            echo "Generating Web Allure Report"
             allure generate artifacts/report-web/allure-results --clean -o reports/allure-web
           else
-            echo "WEB allure-results not found"
+            echo "WEB allure-results empty"
           fi
 
       - name: Verify Generated Allure Reports
@@ -183,9 +196,16 @@ jobs:
           cp artifacts/report-web/reports/cucumber/*.html "$REPORT_DIR/web/" 2>/dev/null || true
           cp artifacts/report-web/reports/cucumber/*.json "$REPORT_DIR/web/" 2>/dev/null || true
           
-          # Copy allure report
-          cp -r reports/allure-api/* "$REPORT_DIR/allure-api/" 2>/dev/null || true
-          cp -r reports/allure-web/* "$REPORT_DIR/allure-web/" 2>/dev/null || true
+          # Copy allure report (full allure folder, not just index)
+          cp -r reports/allure-api/* "$REPORT_DIR/allure-api/" || true
+          cp -r reports/allure-web/* "$REPORT_DIR/allure-web/" || true
+
+          # Debug allure files
+          echo "Allure API files:"
+          ls -R $REPORT_DIR/allure-api || true
+
+          echo "Allure WEB files:"
+          ls -R $REPORT_DIR/allure-web || true
 
       # Debug final folder
       - name: Debug Final Pages Structure
@@ -211,11 +231,11 @@ jobs:
 
               <h2>API Test</h2>
               <a href="api/api_test_report.html">Cucumber API Report</a>
-              <a href="allure-api/index.html">Allure API Report</a>
+              <a href="allure-api/">Allure API Report</a>
 
               <h2>Web UI Test</h2>
               <a href="web/webUi_test_report.html">Cucumber Web Report</a>
-              <a href="allure-web/index.html">Allure Web Report</a>
+              <a href="allure-web/">Allure Web Report</a>
 
           </body>
           </html>
