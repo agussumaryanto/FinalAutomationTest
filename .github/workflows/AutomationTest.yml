@@ -10,6 +10,11 @@ on:
 permissions:
   contents: write   # Moved to global level
 
+# Prevent duplicate workflows
+concurrency:
+  group: automation-tests
+  cancel-in-progress: true
+
 env:
   JAVA_VERSION: 21
   REPORT_DIR: reports # folder report in gh-pages branch
