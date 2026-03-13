@@ -73,8 +73,7 @@ jobs:
           if [ "${{ matrix.test-type }}" = "api" ]; then
             ./gradlew runApiTest --parallel --build-cache --info --stacktrace
           else
-            # continue on failure to keep allure created
-            ./gradlew runWebTest --parallel --build-cache --info --stacktrace --continue
+            ./gradlew runWebTest --parallel --build-cache --info --stacktrace
           fi
 
       # Check if allure-results are actually created
@@ -185,8 +184,8 @@ jobs:
           cp artifacts/report-web/reports/cucumber/*.json "$REPORT_DIR/web/" 2>/dev/null || true
           
           # Copy allure report
-          cp -r reports/allure-api/* "$REPORT_DIR/allure-api/" || true
-          cp -r reports/allure-web/* "$REPORT_DIR/allure-web/" || true
+          cp -r reports/allure-api/* "$REPORT_DIR/allure-api/" 2>/dev/null || true
+          cp -r reports/allure-web/* "$REPORT_DIR/allure-web/" 2>/dev/null || true
 
       # Debug final folder
       - name: Debug Final Pages Structure
