@@ -73,7 +73,8 @@ jobs:
           if [ "${{ matrix.test-type }}" = "api" ]; then
             ./gradlew runApiTest --parallel --build-cache --info --stacktrace
           else
-            ./gradlew runWebTest --parallel --build-cache --info --stacktrace
+            # continue on failure to keep allure created
+            ./gradlew runWebTest --parallel --build-cache --info --stacktrace --continue
           fi
 
       # Check if allure-results are actually created
