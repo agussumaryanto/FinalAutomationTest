@@ -12,8 +12,8 @@ Build tool: Gradle ;
 Testing library: RestAssured ;
 Assertions library: assertj-core ;
 Reporting library: Cucumber report & Allure report ;
-Cucumber report path: FinalAutomationTest\reports\cucumber-results\ ;
-Allure report path: FinalAutomationTest\build\reports\allure-report\
+Cucumber API test report: https://agussumaryanto.github.io/FinalAutomationTest/api/api_test_report.html ;
+Allure API test report: https://agussumaryanto.github.io/FinalAutomationTest/allure-api/ 
 
 === Web UI Testing ===
 Language: Java ;
@@ -25,9 +25,8 @@ Build tool: Gradle ;
 Testing library: Selenium ;
 Assertions library: assertj-core ;
 Reporting library: Cucumber report & Allure report ;
-Cucumber report path: FinalAutomationTest\reports\cucumber-results\ ;
-Allure report path: FinalAutomationTest\build\reports\allure-report\
-
+Cucumber Web test report: https://agussumaryanto.github.io/FinalAutomationTest/api/webUi_test_report.html ;
+Allure Web test report: https://agussumaryanto.github.io/FinalAutomationTest/allure-web/ 
 
 2. Menuliskan test case dengan format gherkin dalam file .feature dan disimpan pada direktori resources 
 --> Test case terdiri dari positif dan negatif
@@ -79,14 +78,16 @@ DriverFactory.java → membuat instance WebDriver (Chrome/Firefox), setup driver
 ConfigReader.java → membaca konfigurasi dari config.properties
 WaitHelper.java → menyediakan explicit/implicit waits agar interaksi UI stabil dan tidak flaky
 
-9. Report test tersimpan dalam format .html pada direktori
-FinalAutomationTest\reports\cucumber-results\ -> untuk cucumber report 
-FinalAutomationTest\build\reports\allure-report\ -> untuk allure report
+9. Menambahkan file .gitattributes (opsional) untuk menampilkan bahasa yang dipakai (pada repo github) serta menghilangkan warning dari hasil running nya
 
-10. Menambahkan file .gitattributes (opsional) untuk menampilkan bahasa yang dipakai (pada repo github) serta menghilangkan warning dari hasil running nya
+10. Mempersiapkan GitHub Actions dengan membuat file FinalAutomationTest.yml pada direktori .github/workflows untuk otomatisasi pengujian kode alur kerja langsung dari repositori 
 
-11. Mempersiapkan GitHub Actions dengan membuat file FinalAutomationTest.yml pada direktori .github/workflows untuk otomatisasi pengujian kode alur kerja langsung dari repositori 
+11. Pengujian dijalankan di GitHub Actions menggunakan Chrome tanpa antarmuka grafis (headless Chrome).
 
-12. Pengujian dijalankan di GitHub Actions menggunakan Chrome tanpa antarmuka grafis (headless Chrome).
+12. Semua laporan dihasilkan dari artefak pipeline CI.
 
-13. Semua laporan dihasilkan dari artefak pipeline CI.
+13. Report test tersimpan dalam branch GitHub Pages
+	link: https://github.com/agussumaryanto/FinalAutomationTest/tree/gh-pages
+
+14. Dashboard test report result
+    link: https://agussumaryanto.github.io/FinalAutomationTest/
