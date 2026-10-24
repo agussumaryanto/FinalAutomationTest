@@ -1,93 +1,104 @@
-Workflow Automation Test
+# 🚀 Workflow Automation Test Framework
 
-1. Mempersiapkan library, dependencies, test framework, konfigurasi Cucumber Runtime, dan Allure dalam 1 file build.gradle
+[![CI/CD Pipeline](https://shields.io)](https://github.com)
+[![Live Dashboard](https://shields.io)](https://agussumaryanto.github.io/FinalAutomationTest/)
 
-=== API Testing ===
-Language: Java ;
-Class Name: TestRunnerApi ;
-URL: https://dummyapi.io/ ;
-Framework testing: JUnit ;
-Framework BDD: Cucumber ;
-Build tool: Gradle ;
-Testing library: RestAssured ;
-Assertions library: assertj-core ;
-Reporting library: Cucumber report & Allure report ;
-Cucumber API test report: https://agussumaryanto.github.io/FinalAutomationTest/api/api_test_report.html ;
-Allure API test report: https://agussumaryanto.github.io/FinalAutomationTest/allure-api/ 
+Proyek ini adalah *framework* otomatisasi pengujian komprehensif yang dirancang untuk memvalidasi kualitas perangkat lunak secara ujung-ke-ujung (*end-to-end*). Seluruh konfigurasi pustaka, dependensi, *test framework*, Cucumber Runtime, dan Allure dikelola secara terpusat di dalam satu file pengelolaan build `build.gradle`.
 
-=== Web UI Testing ===
-Language: Java ;
-Class Name: TestRunnerWeb ;
-URL: https://www.demoblaze.com ;
-Framework testing: JUnit ;
-Framework BDD: Cucumber ;
-Build tool: Gradle ;
-Testing library: Selenium ;
-Assertions library: assertj-core ;
-Reporting library: Cucumber report & Allure report ;
-Cucumber Web test report: https://agussumaryanto.github.io/FinalAutomationTest/api/webUi_test_report.html ;
-Allure Web test report: https://agussumaryanto.github.io/FinalAutomationTest/allure-web/ 
+---
 
-2. Menuliskan test case dengan format gherkin dalam file .feature dan disimpan pada direktori resources 
---> Test case terdiri dari positif dan negatif
+## 📊 Test Report Dashboards & Tautan Laporan
+Seluruh hasil pengujian otomatis dieksekusi melalui *pipeline* CI/CD dan laporannya tersimpan rapi di dalam *branch* `gh-pages`. Anda dapat mengakses dasbor utama serta laporan detail melalui tautan berikut:
 
-File .feature untuk API Test
-	api.feature
-File .feature untuk Web UI Test
-	signup.feature -> testing signup
-	login.feature -> testing login
-	logout.feature -> testing logout
-	product.feature -> testing browsing & add to cart
-	payment.feature -> testing payment/checkout
-	e2e_purchase.feature -> testing end-to-end full flow, dari login -> pilih produk -> checkout -> logouta
+* **🔗 Dasbor Utama:** [Dashboard Test Report Result](https://agussumaryanto.github.io/FinalAutomationTest/)
+* **🗂️ Repositori Laporan:** [GitHub Pages Branch Source](https://github.com/agussumaryanto/FinalAutomationTest/tree/gh-pages)
 
-3. Membuat step definition berdasarkan setiap .feature file untuk memanggil page object model
+### 🔬 Rincian Hasil Pengujian Berdasarkan Lapisan (Layer)
 
-=== Step definition untuk API Testing ===
-ApiStepdefs.java -> implementasi step dari api.feature
+| Kategori Pengujian | Cucumber Report | Allure Report |
+| :--- | :--- | :--- |
+| **⚙️ API Testing** | [Cucumber API Test Report](https://agussumaryanto.github.io/FinalAutomationTest/api/api_test_report.html) | [Allure API Test Report](https://agussumaryanto.github.io/FinalAutomationTest/allure-api/) |
+| **🌐 Web UI Testing** | [Cucumber Web Test Report](https://agussumaryanto.github.io/FinalAutomationTest/api/webUi_test_report.html) | [Allure Web Test Report](https://agussumaryanto.github.io/FinalAutomationTest/allure-web/) |
 
-=== Step definition untuk Web UI Testing ===
-CommonSteps.java -> berisi langkah umum klik tombol, navigasi halaman
-AuthSteps.java -> berisi Login, Logout, Signup, verifikasi
-ProductSteps.java -> manajemen product, mencari produk, pilih produk, add-to-cart
-CheckoutSteps.java -> proses checkout dan pembayaran
+---
 
-4. Membuat POM (Page Object Model) untuk API test dan Web UI test
+## 🛠️ Spesifikasi Teknologi & Lingkungan Uji
 
-=== POM untuk API Testing ===
-ApiBasePage.java -> Base class untuk GET, POST, PUT, DELETE request
-TagApiPage.java -> endpoint tag
-UserApiPage.java -> endpoint user
+| Atribut Komponen | Lapisan API Testing | Lapisan Web UI Testing |
+| :--- | :--- | :--- |
+| **Language** | Java | Java |
+| **Target URL** | [dummyapi.io](https://dummyapi.io/) | [demoblaze.com](https://www.demoblaze.com) |
+| **Class Name** | `TestRunnerApi` | `TestRunnerWeb` |
+| **Testing Framework** | JUnit | JUnit |
+| **BDD Framework** | Cucumber | Cucumber |
+| **Build Tool** | Gradle | Gradle |
+| **Testing Library** | RestAssured | Selenium WebDriver |
+| **Assertions Library** | AssertJ (`assertj-core`) | AssertJ (`assertj-core`) |
+| **Reporting Library** | Cucumber Report & Allure Report | Cucumber Report & Allure Report |
 
-=== POM untuk Web UI Testing ===
-HomePage.java -> elemen dan aksi halaman utama
-LoginPage.java -> form login
-SignUpPage.java -> form registrasi
-ProductPage.java -> halaman produk
-CartPage.java -> interaksi dengan keranjang belanja
-CheckoutPage.java -> form checkout & konfirmasi pembelian
+---
 
-5. Membuat hooks untuk test before dan after class (APIHooks.java dan WebHooks.java) supaya setiap test case bersih dan independen
+## 🏗️ Alur Pengembangan & Struktur Arsitektur Framework
 
-6. Membuat runner untuk menghubungkan feature files (BDD) dengan step definitions (TestRunnerApi.java dan TestRunnerWeb.java) dan menghasilkan test report
+Pengembangan framework ini menerapkan praktik terbaik (*best practices*) industri melalui tahapan terstruktur berikut:
 
-7. Membuat config.properties untuk menyimpan konfigurasi seperti baseURL, informasi browser pilihan, timeout global
+### 1. Desain Skenario Uji (BDD Gherkin)
+Kasus uji (*test cases*) ditulis menggunakan format Gherkin di dalam file berkstensi `.feature` pada direktori `resources`, mencakup skenario positif maupun negatif:
+* **API Test:** `api.feature`
+* **Web UI Test:**
+  * `signup.feature` ➔ Pengujian fitur pendaftaran akun baru (*signup*).
+  * `login.feature` ➔ Pengujian fitur masuk log (*login*).
+  * `logout.feature` ➔ Pengujian fitur keluar log (*logout*).
+  * `product.feature` ➔ Pengujian penjelajahan produk & tambah ke keranjang (*browsing & add to cart*).
+  * `payment.feature` ➔ Pengujian pengisian formulir pembayaran & pelunasan (*payment/checkout*).
+  * `e2e_purchase.feature` ➔ Pengujian alur penuh ujung-ke-ujung (Login ➔ Pilih Produk ➔ Checkout ➔ Logout).
 
-8. Membuat utils sebagai helper/utilitas untuk mendukung Web UI testing
-DriverFactory.java → membuat instance WebDriver (Chrome/Firefox), setup driver path
-ConfigReader.java → membaca konfigurasi dari config.properties
-WaitHelper.java → menyediakan explicit/implicit waits agar interaksi UI stabil dan tidak flaky
+### 2. Implementasi Langkah (*Step Definitions*)
+Berperan sebagai penerjemah langkah Gherkin untuk memanggil aksi pada objek halaman:
+* **API Testing Suite:**
+  * `ApiStepdefs.java` ➔ Implementasi langkah-langkah pengujian dari berkas `api.feature`.
+* **Web UI Testing Suite:**
+  * `CommonSteps.java` ➔ Berisi langkah umum seperti penekanan tombol dan navigasi halaman.
+  * `AuthSteps.java` ➔ Mengelola alur Login, Logout, Signup, beserta verifikasinya.
+  * `ProductSteps.java` ➔ Mengelola manajemen produk, pencarian katalog, pemilihan, hingga masuk keranjang.
+  * `CheckoutSteps.java` ➔ Mengelola alur proses *checkout* dan validasi pembayaran.
 
-9. Menambahkan file .gitattributes (opsional) untuk menampilkan bahasa yang dipakai (pada repo github) serta menghilangkan warning dari hasil running nya
+### 3. Komponen Page Object Model (POM)
+Pemisahan elemen antarmuka dan logika aksi untuk memastikan kode pengujian mudah dirawat (*maintainable*):
+* **POM API Testing:**
+  * `ApiBasePage.java` ➔ Kelas induk (*base class*) untuk menangani permintaan HTTP GET, POST, PUT, dan DELETE.
+  * `TagApiPage.java` ➔ Representasi objek aksi untuk endpoint `/tag`.
+  * `UserApiPage.java` ➔ Representasi objek aksi untuk endpoint `/user`.
+* **POM Web UI Testing:**
+  * `HomePage.java` ➔ Elemen dan aksi pada halaman beranda utama.
+  * `LoginPage.java` ➔ Interaksi dengan formulir komponen masuk log.
+  * `SignUpPage.java` ➔ Interaksi dengan formulir komponen registrasi akun.
+  * `ProductPage.java` ➔ Interaksi dengan elemen informasi di halaman produk detail.
+  * `CartPage.java` ➔ Manajemen interaksi dengan halaman keranjang belanja pengguna.
+  * `CheckoutPage.java` ➔ Manajemen pengisian form *checkout* hingga konfirmasi akhir pembelian.
 
-10. Mempersiapkan GitHub Actions dengan membuat file FinalAutomationTest.yml pada direktori .github/workflows untuk otomatisasi pengujian kode alur kerja langsung dari repositori 
+### 4. Siklus Hidup Pengujian & Pelari (*Hooks & Runners*)
+* **Test Hooks (`APIHooks.java` & `WebHooks.java`):** Menyediakan anotasi kondisi sebelum (*before*) dan sesudah (*after*) kelas dijalankan agar status pengujian kembali bersih, terisolasi, dan saling independen.
+* **Test Runners (`TestRunnerApi.java` & `TestRunnerWeb.java`):** Bertindak sebagai motor penggerak untuk menghubungkan berkas `.feature` (BDD) dengan logika kodenya di *step definitions* sekaligus memicu pembuatan laporan akhir.
 
-11. Pengujian dijalankan di GitHub Actions menggunakan Chrome tanpa antarmuka grafis (headless Chrome).
+### 5. Pengelolaan Konfigurasi & Utilitas (*Utils*)
+* **`config.properties`:** Berkas eksternal terpusat untuk menyimpan parameter global seperti variabel `baseURL`, preferensi peramban (*browser pilihan*), serta batas waktu tunggu global (*timeout*).
+* **Helper UI Utilities:**
+  * `DriverFactory.java` ➔ Mengelola pembuatan instansiasi objek WebDriver (Chrome/Firefox) beserta konfigurasi jalurnya (*driver path*).
+  * `ConfigReader.java` ➔ Berperan membaca dan mengekstrak nilai konfigurasi dari berkas `config.properties`.
+  * `WaitHelper.java` ➔ Menyediakan mekanisme penantian *explicit wait* dan *implicit wait* agar interaksi UI berjalan stabil dan terhindar dari kegagalan acak akibat masalah latensi (*flaky tests*).
 
-12. Semua laporan dihasilkan dari artefak pipeline CI.
+---
 
-13. Report test tersimpan dalam branch GitHub Pages
-	link: https://github.com/agussumaryanto/FinalAutomationTest/tree/gh-pages
+## ⚙️ Integrasi Berkelanjutan & Otomatisasi (CI/CD Pipeline)
 
-14. Dashboard test report result
-    link: https://agussumaryanto.github.io/FinalAutomationTest/
+Eksekusi pengujian telah sepenuhnya diotomatisasi menggunakan ekosistem **GitHub Actions** melalui konfigurasi berkas alur kerja `FinalAutomationTest.yml` di dalam folder `.github/workflows`:
+
+1. **Pemicu Otomatis:** Setiap aktivitas pembaruan kode atau *push* langsung ke repositori akan memicu jalannya pengujian otomatis.
+2. **Lingkungan Headless:** Seluruh suite pengujian Web UI dijalankan di peladen agen GitHub Actions memanfaatkan peramban **Headless Chrome** (Chrome berjalan di latar belakang tanpa antarmuka grafis).
+3. **Penyusunan Artefak:** Setelah eksekusi selesai, pipeline CI akan mengekstrak seluruh data hasil uji untuk dikompilasi menjadi laporan Allure dan Cucumber yang sahih sebelum diperbarui langsung ke dasbor live web Anda.
+
+---
+
+## 🎛️ Konfigurasi Tambahan (Opsional)
+* **`.gitattributes`:** Digunakan untuk mengoptimalkan visualisasi statistik persentase bahasa pemrograman yang terbaca di sistem GitHub, sekaligus menekan munculnya pesan peringatan (*warnings*) yang tidak perlu saat skrip dijalankan.
